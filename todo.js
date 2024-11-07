@@ -2,7 +2,6 @@
     let tasks=[];
     const tasksList=document.getElementById('list');
     const addtaskInput=document.getElementById('add');
-    const addtaskbutton=document.getElementById('create');
     const totaltask=document.getElementById('total-counter');
     const completedtask=document.getElementById('completed-counter');
     const pendingtask=document.getElementById('pending-counter');
@@ -26,16 +25,16 @@
     
     // Fetching data using API call using async and await function
     
-    async function fetchTodo(){
-        try{
-            const response=await fetch('https://jsonplaceholder.typicode.com/todos');
-            const data=await response.json();
-            tasks=data;
-            renderlist();
-        } catch(error){
-            console.log(error);
-        }
-    };
+    // async function fetchTodo(){
+    //     try{
+    //         const response=await fetch('https://jsonplaceholder.typicode.com/todos');
+    //         const data=await response.json();
+    //         tasks=data;
+    //         renderlist();
+    //     } catch(error){
+    //         console.log(error);
+    //     }
+    // };
     
     function addTaskToDOM(task){
         const li=document.createElement('li');
@@ -103,27 +102,28 @@
     }
     
     // Add task function where we update the data but this will not work as this api does not allow us to update data
-    function addtask(task){
-        if (task){
-            fetch('https://jsonplaceholder.typicode.com/todos',{
-                method:'POST',
-                headers:{
-                    'Content-type':'application/json',
-                },
-                body:JSON.stringify(task),
-            }).then(function (response){
-                return response.json()
-            }).then(function (data){
-                console.log(data)
-                tasks.push(task);
-                renderlist();
-                shownotification('Task added Successfully');
-            }).catch(function (error){
-                console.log(error);
-            })
-        }
-        shownotification("Task cannot be added")
-    }
+    // function addtask(task){
+    //     if (task){
+    //         fetch('https://jsonplaceholder.typicode.com/todos',{
+    //             method:'POST',
+    //             headers:{
+    //                 'Content-type':'application/json',
+    //             },
+    //             body:JSON.stringify(task),
+    //         }).then(function (response){
+    //             return response.json()
+    //         }).then(function (data){
+    //             console.log(data)
+    //             tasks.push(task);
+    //             renderlist();
+    //             shownotification('Task added Successfully');
+    //         }).catch(function (error){
+    //             console.log(error);
+    //         })
+    //     }
+    //     shownotification("Task cannot be added")
+    // }
+
     function shownotification(text){
         alert(text);
     }
@@ -161,7 +161,7 @@
     }
     
     function initializeApp(){
-        fetchTodo();
+        // fetchTodo();
         addtaskInput.addEventListener('keyup',handleInputKeyPress);
         document.addEventListener('click',handleClickListner); 
         // using the document.addEventListner so that we do not need to add multiple event listner and in handleclicklistner we are just finding where the user actually clicked and then calling the function accordingly
